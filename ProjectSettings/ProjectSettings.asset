@@ -90,7 +90,7 @@ PlayerSettings:
   useFlipModelSwapchain: 1
   resizableWindow: 1
   useMacAppStoreValidation: 0
-  macAppStoreCategory: public.app-category.games
+  macAppStoreCategory: com.myapp.era
   gpuSkinning: 0
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
@@ -175,6 +175,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: xerysherry.uEmuera
+    Ios: com.myapp.era
   buildNumber: {Ios: 1.0}
   AndroidBundleVersionCode: 16
   AndroidMinSdkVersion: 19
