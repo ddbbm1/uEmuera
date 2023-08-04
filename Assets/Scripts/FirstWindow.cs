@@ -62,7 +62,7 @@ public class FirstWindow : MonoBehaviour
         if(!string.IsNullOrEmpty(main_entry.era_path))
             GetList(main_entry.era_path);
 #endif
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && UNITY_IOS && !UNITY_EDITOR 
         GetList("storage/emulated/0/emuera");
         GetList("storage/emulated/1/emuera");
         GetList("storage/emulated/2/emuera");
