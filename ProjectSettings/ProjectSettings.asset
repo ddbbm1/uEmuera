@@ -303,7 +303,7 @@ PlayerSettings:
       m_Width: 36
       m_Height: 36
       m_Kind: 0
-  - m_BuildTarget: Ios
+  - m_BuildTarget: iOS
     m_Icons:
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: a84f6319866e00446b18f01559c3fb9f, type: 3}
@@ -489,7 +489,7 @@ PlayerSettings:
       m_Height: 81
       m_Kind: 2
       m_SubKind: 
-- m_BuildTarget: Ios
+- m_BuildTarget: iOS
     m_Icons:
     - m_Textures:
       - {fileID: 2800000, guid: a84f6319866e00446b18f01559c3fb9f, type: 3}
