@@ -84,27 +84,6 @@ public class FirstWindow : MonoBehaviour
 #endif
     }
 
-
-        public class CreateFile : MonoBehaviour
-    {
-        void Start()
-        {
-            string path = Application.dataPath + "/test.txt";
-    
-            //Write some text to the test.txt file
-            StreamWriter writer = new StreamWriter(path, true);
-            writer.WriteLine("Test");
-            writer.Close();
-    
-            //Re-import the file to update the reference in the editor
-            AssetDatabase.ImportAsset(path); 
-            TextAsset asset = Resources.Load("test");
-    
-            //Print the text from the file
-            Debug.Log(asset.text);
-        }
-    }
-
     void OnOptionClick()
     {
         var ow = EmueraContent.instance.option_window;
