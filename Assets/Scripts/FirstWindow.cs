@@ -74,7 +74,7 @@ public class FirstWindow : MonoBehaviour
 #endif
 
 #if UNITY_iOS && !UNITY_EDITOR 
-        GetList("/emuera");
+        GetList();
        // var/mobile/Containers/Data/Application/<guid>/
 #endif
 
