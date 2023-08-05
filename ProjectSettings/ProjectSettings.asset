@@ -175,7 +175,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: xerysherry.uEmuera
-    Ios: com.myapp.era
+    iOS: com.myapp.era
   buildNumber: {Ios: 1.0}
   AndroidBundleVersionCode: 16
   AndroidMinSdkVersion: 19
@@ -222,7 +222,7 @@ PlayerSettings:
   iOSLaunchScreenFillPct: 100
   iOSLaunchScreenSize: 100
   iOSLaunchScreenCustomXibPath: 
-  iOSLaunchScreeniPadType: 0
+  iOSLaunchScreeniPadType: 1
   iOSLaunchScreeniPadImage: {fileID: 0}
   iOSLaunchScreeniPadBackgroundColor:
     serializedVersion: 2
@@ -636,6 +636,8 @@ PlayerSettings:
   mobileMTRendering:
     Android: 1
     iPhone: 1
+    iOS: 1
+    iPad: 1
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality:
   - m_BuildTarget: Standalone
@@ -874,6 +876,7 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    iOS: 1
     Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
@@ -885,6 +888,7 @@ PlayerSettings:
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform:
     Android: 3
+    iOS: 3
     Standalone: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
