@@ -155,7 +155,8 @@ public class PListiOS
 			// Change value of CFBundleVersion in Xcode plist
 			var buildKey = "UIBackgroundModes";
 			rootDict.CreateArray (buildKey).AddString ("remote-notification");
-            rootDict.SetBoolean("UIFileSharingEnabled", true);
+           		rootDict.SetBoolean("UIFileSharingEnabled", true);
+			rootDict.SetBoolean("LSSupportsOpeningDocumentsInPlace", true);
 
 			// Write to file
 			File.WriteAllText(plistPath, plist.WriteToString());
