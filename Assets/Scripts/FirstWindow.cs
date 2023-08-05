@@ -62,7 +62,7 @@ public class FirstWindow : MonoBehaviour
         if(!string.IsNullOrEmpty(main_entry.era_path))
             GetList(main_entry.era_path);
 #endif
-#if UNITY_ANDROID && UNITY_IOS && !UNITY_EDITOR 
+#if UNITY_ANDROID && !UNITY_EDITOR 
         GetList("storage/emulated/0/emuera");
         GetList("storage/emulated/1/emuera");
         GetList("storage/emulated/2/emuera");
@@ -70,7 +70,15 @@ public class FirstWindow : MonoBehaviour
         GetList("storage/sdcard0/emuera");
         GetList("storage/sdcard1/emuera");
         GetList("storage/sdcard2/emuera");
+
 #endif
+
+#if UNITY_iOS && !UNITY_EDITOR 
+        GetList("/emuera");
+       // var/mobile/Containers/Data/Application/<guid>/
+#endif
+
+
 #if UNITY_STANDALONE && !UNITY_EDITOR
         GetList(Path.GetFullPath(Application.dataPath + "/.."));
 #endif
