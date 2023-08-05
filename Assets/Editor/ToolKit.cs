@@ -123,7 +123,7 @@ public class PListiOS
 	public static void OnPostprocessBuildiOS (string exportPath)
 	{
 	Debug.Log("[UCB] OnPostprocessBuildiOS");
-	ProcessPostBuild(BuildTarget.iPhone,exportPath);
+	ProcessPostBuild(BuildTarget.iOS,exportPath);
 	}
 	#endif
 
