@@ -5,7 +5,6 @@ using System.Collections;
 using UnityEditor.Callbacks;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
-using UnityEditor.iOS.Xcode.PBXCapabilityType.HomeKit;
 #endif
 
 public class ToolKit : EditorWindow 
