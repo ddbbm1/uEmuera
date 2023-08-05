@@ -74,7 +74,7 @@ public class FirstWindow : MonoBehaviour
 #endif
 
 #if UNITY_IOS && !UNITY_EDITOR 
-        GetList(Application.persistentDataPath);
+        GetList(Application.persistentDataPath + "/Documents");
        // var/mobile/Containers/Data/Application/<guid>/
 #endif
 
