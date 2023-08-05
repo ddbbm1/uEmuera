@@ -73,7 +73,7 @@ public class FirstWindow : MonoBehaviour
 
 #endif
 
-#if UNITY_iOS && !UNITY_EDITOR 
+#if UNITY_IOS && !UNITY_EDITOR 
         GetList();
        // var/mobile/Containers/Data/Application/<guid>/
 #endif
