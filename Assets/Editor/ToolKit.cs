@@ -3,9 +3,7 @@ using UnityEditor;
 using System.IO;
 using System.Collections;
 using UnityEditor.Callbacks;
-#if UNITY_IOS
 using UnityEditor.iOS.Xcode;
-#endif
 
 public class ToolKit : EditorWindow 
 {
@@ -115,54 +113,43 @@ public class ToolKit : EditorWindow
     ShowSystemInfo show_system_info_ = new ShowSystemInfo();
 }
 
-public class PListiOS 
+public static class XcodeOption
 {
-	#if UNITY_CLOUD_BUILD
-	// This method is added in the Advanced Features Settings on UCB
-	// PostBuildProcessor.OnPostprocessBuildiOS
-	public static void OnPostprocessBuildiOS (string exportPath)
-	{
-	Debug.Log("[UCB] OnPostprocessBuildiOS");
-	ProcessPostBuild(BuildTarget.iOS,exportPath);
-	}
-	#endif
 
-	[PostProcessBuild]
-	public static void OnPostprocessBuild (BuildTarget buildTarget, string path)
-	{
-		#if !UNITY_CLOUD_BUILD
-		Debug.Log ("[iOS] OnPostprocessBuild");
-		ProcessPostBuild (buildTarget, path);
-		#endif
-	}
-		
-	public static void ProcessPostBuild(BuildTarget buildTarget, string path) 
-	{
-		#if UNITY_IOS
+    [PostProcessBuild(999)]
+    public static void OnPostProcessBuild( BuildTarget buildTarget, string path)
+    {
+        if(buildTarget == BuildTarget.iOS)
+        {
+            {
+                string projectPath = path + "/Unity-iOS.xcodeproj/project.pbxproj";
 
-        if (buildTarget == BuildTarget.iOS) {
+                PBXProject pbxProject = new PBXProject();
+                pbxProject.ReadFromFile(projectPath);
 
-			Debug.Log ("[iOS] OnPostprocessBuild - PList");
+                string target = pbxProject.TargetGuidByName("Unity-iOS");            
+                pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
 
-			// Get plist
-			string plistPath = path + "/Info.plist";
-			PlistDocument plist = new PlistDocument();
-			plist.ReadFromString(File.ReadAllText(plistPath));
+                pbxProject.WriteToFile (projectPath);
+            }
 
-			// Get root
-			PlistElementDict rootDict = plist.root;
+            {
+                string infoPlistPath = path + "/Info.plist";
 
-			// Change value of CFBundleVersion in Xcode plist
-			var buildKey = "UIBackgroundModes";
-			rootDict.CreateArray (buildKey).AddString ("remote-notification");
-           		rootDict.SetBoolean("UIFileSharingEnabled", true);
-			rootDict.SetBoolean("LSSupportsOpeningDocumentsInPlace", true);
+                PlistDocument plistDoc = new PlistDocument();
+                plistDoc.ReadFromFile(infoPlistPath);
+                if (plistDoc.root != null) {
+                	plistDoc.root.SetBoolean("UIFileSharingEnabled", true);
+			plistDoc.root.SetBoolean("LSSupportsOpeningDocumentsInPlace", true);
+                	plistDoc.WriteToFile(infoPlistPath);
+                }
+                else {
+                    Debug.LogError("ERROR: Can't open " + infoPlistPath);
+                }
+            }
 
-			// Write to file
-			File.WriteAllText(plistPath, plist.WriteToString());
+            //ITSAppUsesNonExemptEncryption
+        }
+    }
 
-		}
-
-		#endif
-	}
 }
