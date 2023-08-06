@@ -13,7 +13,6 @@ public class FirstWindow : MonoBehaviour
         var obj = Resources.Load<GameObject>("Prefab/FirstWindow");
         obj = GameObject.Instantiate(obj);
         obj.name = "FirstWindow";
-        File.WriteAllText(Application.persistentDataPath + "/test.txt", "test");
     }
     static System.Collections.IEnumerator Run(string workspace, string era)
     {
