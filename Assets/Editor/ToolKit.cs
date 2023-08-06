@@ -112,7 +112,8 @@ public class ToolKit : EditorWindow
     }
     ShowSystemInfo show_system_info_ = new ShowSystemInfo();
 }
-
+class targetcahge
+{
     [PostProcessBuild]
     public static void OnPostprocessBuild(BuildTarget target, string projectPath)
     {
@@ -140,9 +141,9 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
 	xcodeProject.WriteToFile(xcodeProjectPath);
 #endif
 	}
-
+}
 #if UNITY_IOS
-    void HandlePlistIosChanges(string projectPath)
+   private static void HandlePlistIosChanges(string projectPath)
 {
 	        var plistPath = Path.Combine(projectPath, "Info.plist");
         var plist = new PlistDocument();
@@ -154,7 +155,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
 	File.WriteAllText(plistPath, plist.WriteToString());
 	}
 #endif
-     PlistElementBoolean CreatePlistElementBoolean(PlistElementDict root, string key)
+   private static  PlistElementBoolean CreatePlistElementBoolean(PlistElementDict root, string key)
     {
         if (!root.values.ContainsKey(key))
         {
@@ -165,7 +166,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
         return result != null ? result : root.CreateBoolean(key,true);
     }
 
-
+}
 /*
 public static class XcodeOption
 {
@@ -206,5 +207,4 @@ public static class XcodeOption
         }
     }
 	*/
-}
 
