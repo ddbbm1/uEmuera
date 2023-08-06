@@ -113,6 +113,60 @@ public class ToolKit : EditorWindow
     ShowSystemInfo show_system_info_ = new ShowSystemInfo();
 }
 
+    [PostProcessBuild]
+    public static void OnPostprocessBuild(BuildTarget target, string projectPath)
+    {
+        RunPostBuildScript(target: target, projectPath: projectPath);
+    }
+private static void RunPostBuildScript(BuildTarget target, string projectPath = "")
+    {
+        if (target == BuildTarget.iOS)
+        {
+#if UNITY_IOS
+	            Debug.Log("[Adjust]: Starting to perform post build tasks for iOS platform.");
+	
+	            string xcodeProjectPath = projectPath + "/Unity-iPhone.xcodeproj/project.pbxproj";
+	
+	            PBXProject xcodeProject = new PBXProject();
+	            xcodeProject.ReadFromFile(xcodeProjectPath);
+	
+	#if UNITY_2019_3_OR_NEWER
+	            string xcodeTarget = xcodeProject.GetUnityMainTargetGuid();
+	#else
+	            string xcodeTarget = xcodeProject.TargetGuidByName("Unity-iPhone");
+	#endif
+	            HandlePlistIosChanges(projectPath);
+	
+	xcodeProject.WriteToFile(xcodeProjectPath);
+#endif
+	}
+
+#if UNITY_IOS
+    private static void HandlePlistIosChanges(string projectPath)
+{
+	        var plistPath = Path.Combine(projectPath, "Info.plist");
+        var plist = new PlistDocument();
+        plist.ReadFromFile(plistPath);
+        var plistRoot = plist.root;
+	CreatePlistElementBoolean(plist2, "UIFileSharingEnabled");
+	CreatePlistElementBoolean(plist2, "LSSupportsOpeningDocumentsInPlace");
+	
+	File.WriteAllText(plistPath, plist.WriteToString());
+	}
+#endif
+    private static PlistElementBoolean CreatePlistElementBoolean(PlistElementDict root, string key)
+    {
+        if (!root.values.ContainsKey(key))
+        {
+            Debug.Log(string.Format("[Adjust]: {0} not found in Info.plist. Creating a new one.", key));
+            return root.CreateBoolean(key,true);
+        }
+        var result = root.values[key].AsBoolean(true);
+        return result != null ? result : root.CreateBoolean(key,true);
+    }
+
+
+/*
 public static class XcodeOption
 {
 
@@ -151,5 +205,6 @@ public static class XcodeOption
             //ITSAppUsesNonExemptEncryption
         }
     }
-
+	*/
 }
+
