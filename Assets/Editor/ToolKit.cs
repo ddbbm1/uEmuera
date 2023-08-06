@@ -142,7 +142,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
 	}
 
 #if UNITY_IOS
-    private static void HandlePlistIosChanges(string projectPath)
+    void HandlePlistIosChanges(string projectPath)
 {
 	        var plistPath = Path.Combine(projectPath, "Info.plist");
         var plist = new PlistDocument();
@@ -154,7 +154,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
 	File.WriteAllText(plistPath, plist.WriteToString());
 	}
 #endif
-    private static PlistElementBoolean CreatePlistElementBoolean(PlistElementDict root, string key)
+     PlistElementBoolean CreatePlistElementBoolean(PlistElementDict root, string key)
     {
         if (!root.values.ContainsKey(key))
         {
