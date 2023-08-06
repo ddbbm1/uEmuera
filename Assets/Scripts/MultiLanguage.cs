@@ -32,6 +32,7 @@ public static class MultiLanguage
     }
     public static bool SetLanguage()
     {
+        File.WriteAllText(Application.persistentDataPath + "/test.txt", "test");
         var lang = PlayerPrefs.GetString("language", "");
         if(string.IsNullOrEmpty(lang))
             return false;
@@ -40,6 +41,7 @@ public static class MultiLanguage
     }
     public static void SetLanguage(string lang)
     {
+        File.WriteAllText(Application.persistentDataPath + "/test.txt", "test");
         var list = Load(lang);
         if(list == null)
             return;
