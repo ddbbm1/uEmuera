@@ -160,10 +160,10 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
         if (!root.values.ContainsKey(key))
         {
             Debug.Log(string.Format("[Adjust]: {0} not found in Info.plist. Creating a new one.", key));
-            return root.CreateBoolean(key,true);
+            return root.SetBoolean(key,true);
         }
         var result = root.values[key].AsBoolean(true);
-        return result != null ? result : root.CreateBoolean(key,true);
+        return result != null ? result : root.SetBoolean(key,true);
     }
 
 }
