@@ -149,19 +149,12 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
         var plist = new PlistDocument();
         plist.ReadFromFile(plistPath);
         var plistRoot = plist.root;
-	CreatePlistElementBoolean(plistRoot, "UIFileSharingEnabled");
-	CreatePlistElementBoolean(plistRoot, "LSSupportsOpeningDocumentsInPlace");
+	plistRoot.SetBoolean(plistRoot, "UIFileSharingEnabled");
+	plistRoot.SetBoolean(plistRoot, "LSSupportsOpeningDocumentsInPlace");
 	
 	File.WriteAllText(plistPath, plist.WriteToString());
 	}
 #endif
-   private static void CreatePlistElementBoolean(PlistElementDict root, string key)
-    {
-            Debug.Log(string.Format("[Adjust]: {0} Creating a new one.", key));
-        root.SetBoolean(key,true);
-	
-    }
-
 }
 /*
 public static class XcodeOption
