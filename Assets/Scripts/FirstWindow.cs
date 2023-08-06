@@ -70,6 +70,7 @@ public class FirstWindow : MonoBehaviour
 
 		#endif
 	}
+ }
     static System.Collections.IEnumerator Run(string workspace, string era)
     {
         var async = Resources.UnloadUnusedAssets();
