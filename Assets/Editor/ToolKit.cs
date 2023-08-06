@@ -155,7 +155,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
 	File.WriteAllText(plistPath, plist.WriteToString());
 	}
 #endif
-   private static void PlistElementBoolean CreatePlistElementBoolean(PlistElementDict root, string key)
+   private static void CreatePlistElementBoolean(PlistElementDict root, string key)
     {
             Debug.Log(string.Format("[Adjust]: {0} Creating a new one.", key));
         root.SetBoolean(key,true);
