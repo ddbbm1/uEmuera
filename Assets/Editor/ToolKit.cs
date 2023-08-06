@@ -122,12 +122,12 @@ public static class XcodeOption
         if(buildTarget == BuildTarget.iOS)
         {
             {
-                string projectPath = path + "/Unity-iOS.xcodeproj/project.pbxproj";
+                string projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
 
                 PBXProject pbxProject = new PBXProject();
                 pbxProject.ReadFromFile(projectPath);
 
-                string target = pbxProject.TargetGuidByName("Unity-iOS");            
+                string target = pbxProject.TargetGuidByName("Unity-iPhone");            
                 pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
 
                 pbxProject.WriteToFile (projectPath);
