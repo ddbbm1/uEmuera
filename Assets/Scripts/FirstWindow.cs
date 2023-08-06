@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MinorShift._Library;
+// this
+using UnityEditor;
+using UnityEditor.Callbacks;
+#if UNITY_IOS
+using UnityEditor.iOS.Xcode;
+#endif
+
 
 public class FirstWindow : MonoBehaviour
 {
@@ -74,6 +81,57 @@ public class FirstWindow : MonoBehaviour
 #endif
 
 #if UNITY_IOS && !UNITY_EDITOR 
+
+    public class PListiOS 
+{
+	#if UNITY_CLOUD_BUILD
+	// This method is added in the Advanced Features Settings on UCB
+	// PostBuildProcessor.OnPostprocessBuildiOS
+	public static void OnPostprocessBuildiOS (string exportPath)
+	{
+	Debug.Log("[UCB] OnPostprocessBuildiOS");
+	ProcessPostBuild(BuildTarget.iOS,exportPath);
+	}
+	#endif
+
+	[PostProcessBuild]
+	public static void OnPostprocessBuild (BuildTarget buildTarget, string path)
+	{
+		#if !UNITY_CLOUD_BUILD
+		Debug.Log ("[iOS] OnPostprocessBuild");
+		ProcessPostBuild (buildTarget, path);
+		#endif
+	}
+		
+	public static void ProcessPostBuild(BuildTarget buildTarget, string path) 
+	{
+		#if UNITY_IOS
+
+        if (buildTarget == BuildTarget.iOS) {
+
+			Debug.Log ("[iOS] OnPostprocessBuild - PList");
+
+			// Get plist
+			string plistPath = path + "/Info.plist";
+			PlistDocument plist = new PlistDocument();
+			plist.ReadFromString(File.ReadAllText(plistPath));
+
+			// Get root
+			PlistElementDict rootDict = plist.root;
+
+			// Change value of CFBundleVersion in Xcode plist
+			var buildKey = "UIBackgroundModes";
+			rootDict.CreateArray (buildKey).AddString ("remote-notification");
+           		rootDict.SetBoolean("UIFileSharingEnabled", true);
+			rootDict.SetBoolean("LSSupportsOpeningDocumentsInPlace", true);
+
+			// Write to file
+			File.WriteAllText(plistPath, plist.WriteToString());
+
+		}
+
+		#endif
+	}
         GetList(Application.persistentDataPath);
        // var/mobile/Containers/Data/Application/<guid>/
 #endif
