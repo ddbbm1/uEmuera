@@ -151,7 +151,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
         var plistRoot = plist.root;
 	plistRoot.SetBoolean("UIFileSharingEnabled",true);
 	plistRoot.SetBoolean("LSSupportsOpeningDocumentsInPlace",true);
-	
+	Debug.Log("[Adjust]: plist UIFileSharingEnabled,LSSupportsOpeningDocumentsInPlace change.");
 	File.WriteAllText(plistPath, plist.WriteToString());
 	}
 #endif
