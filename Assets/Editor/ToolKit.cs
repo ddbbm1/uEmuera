@@ -162,7 +162,7 @@ private static void RunPostBuildScript(BuildTarget target, string projectPath = 
             Debug.Log(string.Format("[Adjust]: {0} not found in Info.plist. Creating a new one.", key));
             return root.SetBoolean(key,true);
         }
-        var result = root.values[key].AsBoolean();
+        var result = root.values[key].AsArray();
         return result != null ? result : root.SetBoolean(key,true);
     }
 
