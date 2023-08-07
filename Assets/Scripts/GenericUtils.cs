@@ -23,19 +23,25 @@ public static class GenericUtils
     /// <summary>
     /// 获得子对象
     /// </summary>
+    // type 타입의 컴포넌트를 가진 obj 게임 오브젝트의 자식 오브젝트 중에서 이름이 childname인 오브젝트를 찾아서 반환합니다.
+// includeInactive 매개 변수를 통해 비활성화된 게임 오브젝트도 검색할 수 있습니다.
     public static Component FindChildByName(System.Type type, GameObject obj,
                                             string childname, bool includeInactive = false)
     {
+        // obj가 null이면 null을 반환합니다.
         if(!obj)
             return null;
+        // obj 게임 오브젝트의 자식 오브젝트 중에서 type 컴포넌트를 가진 모든 오브젝트를 list에 저장합니다.
         var list = obj.GetComponentsInChildren(type, includeInactive);
+        // list의 길이만큼 반복문을 실행하면서 list[i]가 childname과 같은 이름을 가지면 해당 컴포넌트를 반환합니다.
         var length = list.Length;
         for(int i=0; i<length; ++i)
-        {
+        {    
             var v = list[i];
             if(v.name.CompareTo(childname) == 0)
                 return v;
         }
+             // 찾지 못하면 null을 반환합니다.
         return null;
     }
     /// <summary>
