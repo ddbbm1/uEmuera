@@ -47,23 +47,31 @@ public static class GenericUtils
     /// <summary>
     /// 获取子对象列表
     /// </summary>
+    // 게임 오브젝트의 자식 오브젝트에서 특정 컴포넌트를 가진 모든 자식 오브젝트를 찾아서 리스트로 반환하는 함수입니다.
+// T는 찾을 컴포넌트의 타입입니다.
     public static List<T> FindChildren<T>(GameObject obj, bool includeInactive = false)
         where T : Component
     {
+            // 결과 리스트를 만듭니다.
         var result_list = new List<T>();
+            // obj가 null인 경우 빈 리스트를 반환합니다.
         if(!obj)
             return result_list;
 
+            // obj의 모든 자식 오브젝트의 Transform 컴포넌트를 가져옵니다.
         var list = obj.GetComponentsInChildren<Transform>(includeInactive);
         var length = list.Length;
         for(int i = 0; i < length; ++i)
         {
+            // Transform 컴포넌트에서 T 타입의 컴포넌트를 찾습니다.
             var v = list[i];
             var c = v.GetComponent<T>();
             if(c)
+                // T 타입의 컴포넌트를 찾으면 결과 리스트에 추가합니다.
                 result_list.Add(c);
         }
 
+            // 결과 리스트를 반환합니다.
         return result_list;
     }
     /// <summary>
