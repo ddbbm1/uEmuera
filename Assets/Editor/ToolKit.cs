@@ -7,7 +7,7 @@ using UnityEditor.Callbacks;
 public class ToolKit : EditorWindow 
 {
     [MenuItem("Tools/ToolKit", false, 100)]
-    public static void Show()
+    public static new void Show()
     {
         EditorWindow.GetWindow(typeof(ToolKit));
     }
