@@ -39,7 +39,7 @@ namespace MinorShift.Emuera.Sub
 			try
 			{
 				stream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-				StreamReader reader = new StreamReader(stream.Normalize(NormalizationForm.FormC), Config.Encode);
+				StreamReader reader = new StreamReader(stream.NormalizationForm.FormC, Config.Encode);
     
 	    			//string input = writer.ReadToEnd(); // 파일 내용 읽기
 				//string normalized = input.Normalize(NormalizationForm.FormC); // 형식 C로 정규화
