@@ -40,10 +40,7 @@ namespace MinorShift.Emuera.Sub
 			try
 			{
 				stream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-				StreamReader readera = new StreamReader(stream, Config.Encode);
-   				string content = readera.ReadToEnd();
-				string normalizedContent = content.Normalize(NormalizationForm.FormC);
-    				 reader = new StreamReader(normalizedContent, Config.Encode);
+				reader = new StreamReader(stream, Config.Encode);
 			}
 			catch
 			{
