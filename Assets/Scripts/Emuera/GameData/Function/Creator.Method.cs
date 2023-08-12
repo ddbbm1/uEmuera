@@ -2510,6 +2510,7 @@ namespace MinorShift.Emuera.GameData.Function
             public override Int64 GetIntValue(ExpressionMediator exm, IOperandTerm[] arguments)
             {
                 string target = arguments[0].GetStrValue(exm);
+		target = target.Normalize(NormalizationForm.FormC);
                 int length = Encoding.UTF32.GetEncoder().GetByteCount(target.ToCharArray(), 0, target.Length, false);
                 byte[] bytes = new byte[length];
                 Encoding.UTF32.GetEncoder().GetBytes(target.ToCharArray(), 0, target.Length, bytes, 0, false);
