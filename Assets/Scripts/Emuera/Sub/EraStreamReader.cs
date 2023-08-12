@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Globalization;
 
 namespace MinorShift.Emuera.Sub
 {
@@ -39,16 +40,10 @@ namespace MinorShift.Emuera.Sub
 			try
 			{
 				stream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-				StreamReader reader = new StreamReader(stream.NormalizationForm.FormC, Config.Encode);
-    
-	    			//string input = writer.ReadToEnd(); // 파일 내용 읽기
-				//string normalized = input.Normalize(NormalizationForm.FormC); // 형식 C로 정규화
-				//stream.Position = 0; // 스트림 위치 초기화
-				//stream.SetLength(0); // 스트림 길이 초기화
-				//reader = new StreamReader(stream, Config.Encode); // StreamWriter 생성
-				//reader.Write(normalized); // 정규화된 문자열 쓰기
-				//reader.Flush(); // 스트림에 쓰기
-				//stream.Position = 0; // 스트림 위치 초기화
+				StreamReader readera = new StreamReader(stream, Config.Encode);
+   				string content = readera.ReadToEnd();
+				string normalizedContent = content.Normalize(NormalizationForm.FormC);
+    				 reader = new StreamReader(normalizedContent, Config.Encode);
 			}
 			catch
 			{
