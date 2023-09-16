@@ -914,6 +914,7 @@ PlayerSettings:
     Android: 1
     Standalone: 1
     iOS: 1
+    iPhone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
